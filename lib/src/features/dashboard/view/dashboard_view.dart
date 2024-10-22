@@ -28,7 +28,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> with LifecycleMixin {
         builder: (context, state) {
           return PopScope(
             canPop: false,
-            onPopInvoked: (didPop) async {
+            onPopInvokedWithResult: (didPop, result) async {
               context.read<DashboardBloc>().goHome();
             },
             child: Scaffold(
