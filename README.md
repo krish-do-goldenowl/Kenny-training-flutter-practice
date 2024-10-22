@@ -1,19 +1,4 @@
-# Kenny-training-flutter-practice
-
-![screenshot](resources/images/github-banner.png)
-
-# Flutter Boilerplate
-
-Fork this project then start you project with a lot of stuck prepare
-
-Base project made with much: . Contains Bloc, Route, and much more!
-
-## Table of contents
-
-- [How to Use](#how-to-use)
-- [Code Conventions](#code-conventions)
-- [Dependencies](#dependencies)
-- [Code structure](#code-structure)
+# Todo app
 
 ## Prerequisites
 
@@ -21,81 +6,31 @@ Base project made with much: . Contains Bloc, Route, and much more!
 - [Firebase staging](https://console.firebase.google.com/u/0/project/flutter-app-ec8dd/settings/iam)
 - [Firebase prod](https://console.firebase.google.com/u/0/project/template-app-prod-3a034/settings/iam)
 
-## How to Use
+## How to Run
 
-## Run this template
-
-1. Download or clone this repo by using the link below:
-
-   ```
-   https://github.com/GoldenOwlAsia/mobile-flutter-template.git
-   ```
-
-2. Go to project root and execute the following command in console to get the required dependencies:
+1. Go to project root and execute the following command in console to get the required dependencies:
 
    ```
    flutter pub get
    ```
 
-3. Now run the generator
+2. Now run the generator
 
    ```
    flutter packages pub run build_runner build
    ```
 
-4. To run staging project
+3. To run staging project
 
    ```
    flutter run --flavor staging --target lib/main_staging.dart
    ```
 
-5. To run production project
+4. To run production project
 
    ```
    flutter run --flavor production --target lib/main_production.dart
    ```
-
-## Use this template to create your project
-
-1. Download or clone this repo by using the link below:
-
-   ```
-   https://github.com/GoldenOwlAsia/mobile-flutter-template.git
-   ```
-
-2. Go to project root and execute the following command in console to update this project config
-
-   ```sh
-   sudo sh ./customizer.sh your.package.name
-   ```
-
-- [x] Remove git, update readme
-- [x] Change your bundle-id
-
-3. Change your app builder id (iOS & Android)
-
-- Replace/Update your firebase config as your project.
-  - Android staging: `android/app/src/staging/google-services.json`
-  - Android production: `android/app/src/production/google-services.json`
-  - iOS staging: `ios/config/GoogleService-Info.plist`
-  - iOS production: `ios/config/GoogleService-Info.plist`
-  - Update `firebase_options_prod.dart`
-  - Update `firebase_options_stg.dart`
-  - Update `REVERSED_CLIENT_ID` on file info.plist
-
-4. Update Firebase config - by run command
-
-   ```
-   flutterfire config \
-     --project={YOUR_FIREBASE_ID_PROJECT} \
-     --out={part to save firebase_options.dart} \
-     --ios-bundle-id={BUNDLE_ID_APP} \
-     --android-app-id={APP_ID}
-   ```
-
-   -> [Read More here](https://github.com/GoldenOwlAsia/mobile-flutter-template/wiki/Flavors)
-
-5. [Try to run this code](#run-this-template)
 
 # Code Conventions
 
@@ -208,17 +143,3 @@ lib/
 |- main.dart
 |- modules
 ```
-
-## Navigation Stack
-
-![](resources/images/screens.png)
-
-## Wiki
-
-Checkout [wiki](https://github.com/GoldenOwlAsia/mobile-flutter-template/wiki) for more info
-
-## Screenshot
-
-| Account                                              | Profile                                              | Login                                              |
-| ---------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------- |
-| <img src="./resources/images/account.png" width=250> | <img src="./resources/images/profile.png" width=250> | <img src="./resources/images/login.png" width=250> |

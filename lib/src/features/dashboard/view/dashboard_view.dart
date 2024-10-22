@@ -27,7 +27,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         builder: (context, state) {
           return PopScope(
             canPop: false,
-            onPopInvokedWithResult: (didPop, result) async {
+            onPopInvoked: (didPop) async {
               context.read<DashboardBloc>().goHome();
             },
             child: Scaffold(

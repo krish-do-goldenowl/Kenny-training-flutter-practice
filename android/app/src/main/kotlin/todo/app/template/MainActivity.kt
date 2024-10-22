@@ -1,4 +1,4 @@
-package com.pingak9.template
+package todo.app
 
 import io.flutter.embedding.android.FlutterActivity
 

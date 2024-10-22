@@ -25,12 +25,8 @@ mixin _$MUser {
   String? get avatar => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
 
-  /// Serializes this MUser to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MUser
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MUserCopyWith<MUser> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -52,8 +48,6 @@ class _$MUserCopyWithImpl<$Res, $Val extends MUser>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MUser
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,8 +95,6 @@ class __$$MUserImplCopyWithImpl<$Res>
       _$MUserImpl _value, $Res Function(_$MUserImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MUser
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -166,13 +158,11 @@ class _$MUserImpl extends _MUser {
             (identical(other.email, email) || other.email == email));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, avatar, email);
 
-  /// Create a copy of MUser
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MUserImplCopyWith<_$MUserImpl> get copyWith =>
@@ -204,11 +194,8 @@ abstract class _MUser extends MUser {
   String? get avatar;
   @override
   String? get email;
-
-  /// Create a copy of MUser
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MUserImplCopyWith<_$MUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

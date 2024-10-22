@@ -39,12 +39,8 @@ mixin _$MSocialUser {
   int? get gender => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
 
-  /// Serializes this MSocialUser to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MSocialUser
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MSocialUserCopyWith<MSocialUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -78,8 +74,6 @@ class _$MSocialUserCopyWithImpl<$Res, $Val extends MSocialUser>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MSocialUser
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -168,8 +162,6 @@ class __$$MSocialUserImplCopyWithImpl<$Res>
       _$MSocialUserImpl _value, $Res Function(_$MSocialUserImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MSocialUser
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -301,14 +293,12 @@ class _$MSocialUserImpl implements _MSocialUser {
             (identical(other.phone, phone) || other.phone == phone));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, type, userID, accessToken,
       idToken, fullName, email, avatar, birthDate, gender, phone);
 
-  /// Create a copy of MSocialUser
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MSocialUserImplCopyWith<_$MSocialUserImpl> get copyWith =>
@@ -340,21 +330,21 @@ abstract class _MSocialUser implements MSocialUser {
 
   @override
   MSocialType get type;
+  @override
 
   /// Apple and Facebook userID
-  @override
   String? get userID;
+  @override
 
   /// Facebook & Google Access Token
-  @override
   String? get accessToken;
+  @override
 
   /// Google ID Token
-  @override
   String? get idToken;
+  @override
 
   /// FB and Google information
-  @override
   String? get fullName;
   @override
   String? get email;
@@ -366,11 +356,8 @@ abstract class _MSocialUser implements MSocialUser {
   int? get gender;
   @override
   String? get phone;
-
-  /// Create a copy of MSocialUser
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MSocialUserImplCopyWith<_$MSocialUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

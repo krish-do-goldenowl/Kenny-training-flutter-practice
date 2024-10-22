@@ -33,12 +33,8 @@ mixin _$MPaginationMeta {
   @JsonKey(name: 'last_page')
   int get lastPage => throw _privateConstructorUsedError;
 
-  /// Serializes this MPaginationMeta to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MPaginationMeta
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MPaginationMetaCopyWith<MPaginationMeta> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -68,8 +64,6 @@ class _$MPaginationMetaCopyWithImpl<$Res, $Val extends MPaginationMeta>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MPaginationMeta
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,8 +128,6 @@ class __$$MPaginationMetaImplCopyWithImpl<$Res>
       _$MPaginationMetaImpl _value, $Res Function(_$MPaginationMetaImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MPaginationMeta
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -247,14 +239,12 @@ class _$MPaginationMetaImpl
                 other.lastPage == lastPage));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, pageSize, totalCount, pageNumber,
       prevPage, nextPage, lastPage);
 
-  /// Create a copy of MPaginationMeta
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MPaginationMetaImplCopyWith<_$MPaginationMetaImpl> get copyWith =>
@@ -300,11 +290,8 @@ abstract class _MPaginationMeta implements MPaginationMeta {
   @override
   @JsonKey(name: 'last_page')
   int get lastPage;
-
-  /// Create a copy of MPaginationMeta
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MPaginationMetaImplCopyWith<_$MPaginationMetaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

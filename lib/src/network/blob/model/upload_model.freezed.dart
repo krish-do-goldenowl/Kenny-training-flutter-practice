@@ -22,12 +22,8 @@ MUpload _$MUploadFromJson(Map<String, dynamic> json) {
 mixin _$MUpload {
   String get url => throw _privateConstructorUsedError;
 
-  /// Serializes this MUpload to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of MUpload
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $MUploadCopyWith<MUpload> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -49,8 +45,6 @@ class _$MUploadCopyWithImpl<$Res, $Val extends MUpload>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of MUpload
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,8 +77,6 @@ class __$$MUploadImplCopyWithImpl<$Res>
       _$MUploadImpl _value, $Res Function(_$MUploadImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of MUpload
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -131,13 +123,11 @@ class _$MUploadImpl with DiagnosticableTreeMixin implements _MUpload {
             (identical(other.url, url) || other.url == url));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, url);
 
-  /// Create a copy of MUpload
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$MUploadImplCopyWith<_$MUploadImpl> get copyWith =>
@@ -158,11 +148,8 @@ abstract class _MUpload implements MUpload {
 
   @override
   String get url;
-
-  /// Create a copy of MUpload
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$MUploadImplCopyWith<_$MUploadImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
