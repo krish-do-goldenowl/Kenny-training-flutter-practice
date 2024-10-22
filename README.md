@@ -32,6 +32,46 @@
    flutter run --flavor production --target lib/main_production.dart
    ```
 
+5. Execute the following command to build app:
+
+### Android
+
+1. Change version and build number in `pubspec.yaml`
+
+   ```
+   flutter build appbundle
+   ```
+
+2. Or run command line below to build with your build version
+
+   ```
+   flutter build appbundle --build-name=1.2.0 --build-number=2
+   ```
+
+3. Access [Play console](https://play.google.com/console/u/0/developers) to create a new release and upload your build
+
+### iOS
+
+1. Change version and build number in Xcode
+2. Access <https://developer.apple.com/> to download profile and signing your app
+
+- **Manually:** Pod install then Open Xcode to deploy
+
+  ```sh
+  flutter build ios --release --no-codesign
+  cd ios && pod install
+  ```
+
+  - Open XCode and deploy
+  - On menu bar, select **Product** > **Archive** to build and deploy to TestFlight
+
+- **Use Fastlane:** run command bellow
+
+  ```sh
+  cd ios
+  fastlane beta
+  ```
+
 # Code Conventions
 
 - [analysis_options.yaml](analysis_options.yaml)
