@@ -4,11 +4,13 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/src/locator.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'firebase_options/firebase_options_stg.dart';
 import 'src/app.dart';
 
 Future main() async {
+  await dotenv.load(fileName: ".env.staging");
   await initializeApp(
       name: "staging", firebaseOptions: DefaultFirebaseOptions.currentPlatform);
   if (kIsWeb) {

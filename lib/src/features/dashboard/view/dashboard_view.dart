@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapp/src/features/dashboard/logic/navigation_bar_item.dart';
-import 'package:myapp/src/features/common/logic/lifecycle_mixin.dart';
 import 'package:myapp/src/features/dashboard/widget/bottom_navigation_bar.dart';
 import 'package:myapp/src/features/dashboard/logic/dashboard_bloc.dart';
 
@@ -19,7 +18,7 @@ class DashBoardScreen extends StatefulWidget {
   State<DashBoardScreen> createState() => _DashBoardScreenState();
 }
 
-class _DashBoardScreenState extends State<DashBoardScreen> with LifecycleMixin {
+class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -40,10 +39,4 @@ class _DashBoardScreenState extends State<DashBoardScreen> with LifecycleMixin {
       ),
     );
   }
-
-  @override
-  void onPause() {}
-
-  @override
-  void onResume() {}
 }
