@@ -9,7 +9,7 @@ import 'package:myapp/src/features/authentication/view/forgot_view.dart';
 import 'package:myapp/src/features/authentication/view/signin_view.dart';
 import 'package:myapp/src/features/authentication/view/signup_view.dart';
 import 'package:myapp/src/features/dashboard/view/dashboard_view.dart';
-import 'package:myapp/src/features/home/view/home_view.dart';
+import 'package:myapp/src/features/register/view/register_view.dart';
 import 'package:myapp/src/features/sample/view/sample_detail_view.dart';
 import 'package:myapp/src/features/sample/view/sample_list_view.dart';
 import '../features/common/view/not_found_view.dart';
@@ -70,8 +70,8 @@ class AppRouter {
                     path: AppRouteNames.sampleDetails.buildSubPathParam,
                     name: AppRouteNames.sampleDetails.name,
                     builder: (_, state) {
-                      final id =
-                          state.pathParameters[AppRouteNames.sampleDetails.paramName]!;
+                      final id = state.pathParameters[
+                          AppRouteNames.sampleDetails.paramName]!;
                       return SampleItemDetailsView(id: id);
                     },
                   )
