@@ -1,6 +1,8 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:myapp/src/_dev/dev_screen.dart';
 import 'package:myapp/src/features/dashboard/logic/navigation_bar_item.dart';
 import 'package:myapp/src/features/account/profile/view/profile_view.dart';
@@ -12,8 +14,11 @@ import 'package:myapp/src/features/dashboard/view/dashboard_view.dart';
 import 'package:myapp/src/features/register/view/register_view.dart';
 import 'package:myapp/src/features/sample/view/sample_detail_view.dart';
 import 'package:myapp/src/features/sample/view/sample_list_view.dart';
+import 'package:myapp/src/features/splashScreen/view/splash_screen_view.dart';
+
 import '../features/common/view/not_found_view.dart';
 import '../features/photo_view/photo_view_page.dart';
+
 import 'coordinator.dart';
 import 'extras/photo_view_extra.dart';
 import 'route_name.dart';
@@ -21,10 +26,19 @@ import 'route_name.dart';
 class AppRouter {
   late final router = GoRouter(
     navigatorKey: AppCoordinator.navigatorKey,
-    initialLocation: AppRouteNames.home.path,
+    //initialLocation: AppRouteNames.home.path,
+    initialLocation: AppRouteNames.splashScreen.path,
     debugLogDiagnostics: kDebugMode,
     observers: [BotToastNavigatorObserver()],
     routes: <RouteBase>[
+      // App todos routes
+      GoRoute(
+          parentNavigatorKey: AppCoordinator.navigatorKey,
+          path: AppRouteNames.splashScreen.path,
+          name: AppRouteNames.splashScreen.name,
+          builder: (BuildContext context, GoRouterState state) =>
+              const SplashScreenView()),
+      // Routes from template
       GoRoute(
         parentNavigatorKey: AppCoordinator.navigatorKey,
         path: AppRouteNames.signIn.path,

@@ -1,3 +1,5 @@
+part of './login_cubit.dart';
+
 class LoginState {
   final String email;
   final String password;

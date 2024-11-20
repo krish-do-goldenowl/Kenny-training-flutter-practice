@@ -1,3 +1,5 @@
+part of './register_cubit.dart';
+
 class RegisterState {
   final String fullName;
   final String email;
