@@ -30,7 +30,20 @@ class AppStyles {
     fontWeight: FontWeight.normal,
   );
 
-// https://api.flutter.dev/flutter/material/TextTheme-class.html
+  static const normalText = TextStyle(
+      fontFamily: 'Poppins',
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      color: Colors.black);
+
+  static const highLightText = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textHighLight,
+  );
+
+  // https://api.flutter.dev/flutter/material/TextTheme-class.html
   static TextTheme get textTheme {
     final textTheme = const TextTheme().apply(
       bodyColor: AppColors.text,

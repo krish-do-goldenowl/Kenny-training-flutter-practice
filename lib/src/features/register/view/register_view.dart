@@ -1,42 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:myapp/src/_dev/widget/dev_wrap_button.dart';
-import 'package:myapp/src/dialogs/toast_wrapper.dart';
-import 'package:myapp/src/router/coordinator.dart';
-import 'package:myapp/src/router/route_name.dart';
-import 'package:myapp/widgets/button/text_button.dart';
+import 'package:myapp/widgets/layout/base_layout.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class RegisterView extends StatelessWidget {
+  const RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const DevWrapButton(child: Text('Welcome')),
+    return BaseLayout(
+      buttonText: 'Register',
+      onButtonPressed: () {},
+      content: const Column(
+        children: [
+          Column(
+            children: [
+              Text(
+                'Welcome to Onboard!',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  height: 1.5,
+                ),
+              ),
+              SizedBox(height: 30),
+              SizedBox(
+                width: 200,
+                child: Text("Let's help to meet up your tasks.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.normal,
+                        fontSize: 13)),
+              ),
+            ],
+          )
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            XTextButton(
-              title: 'Show Toast',
-              onPressed: () {
-                XToast.show('Clicked');
-              },
-            ),
-            const XTextButton(
-              title: 'Show sample view',
-              onPressed: AppCoordinator.showSampleScreen,
-            ),
-            XTextButton(
-              title: 'Show dev view',
-              onPressed: () => context.pushNamed(AppRouteNames.dev.name),
-            ),
-          ],
-        ),
-      ),
+      currentView: 'register',
     );
   }
 }

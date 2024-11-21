@@ -15,6 +15,8 @@ class AppColors {
   static const black3 = Color(0xFF3E4247);
   // button
   static const button = Color(0xFF50c1c9);
+  // text
+  static const textHighLight = Color(0xFF50C2C9);
   // white
   static const white = Colors.white;
   static const white2 = Color(0xFFEDEDED);
