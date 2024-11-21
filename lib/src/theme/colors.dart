@@ -13,10 +13,13 @@ class AppColors {
   static const black = Colors.black;
   static const black2 = Color(0xFF1E1E1E);
   static const black3 = Color(0xFF3E4247);
+  // button
+  static const button = Color(0xFF50c1c9);
   // white
   static const white = Colors.white;
   static const white2 = Color(0xFFEDEDED);
   static const white3 = Color(0xFFF4F4F4);
+  static const white4 = Color(0xFFF0F4F3);
   // gray
   static const grey = Color(0xFF8E8E8E);
   static const grey2 = Color(0xFFAEAEAE);

@@ -20,6 +20,7 @@ class AppTheme {
 
         /// Colors
         primaryColor: AppColors.primary,
+        splashColor: AppColors.white4,
         brightness: Brightness.light,
 
         /// Text
@@ -44,8 +45,8 @@ class AppTheme {
         buttonTheme: const ButtonThemeData(),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            fixedSize: const Size.fromHeight(50),
-          ),
+              fixedSize: const Size.fromHeight(50),
+              backgroundColor: AppColors.button),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
