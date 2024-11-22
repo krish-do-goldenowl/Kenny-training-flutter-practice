@@ -57,12 +57,12 @@ android {
         production {
             dimension "flavor"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "Template"]
+            manifestPlaceholders = [appName: "Kenny Todos flutter"]
         }
         staging {
             dimension "flavor"
             applicationIdSuffix ".stg"
-            manifestPlaceholders = [appName: "Template [STG]"]
+            manifestPlaceholders = [appName: "Kenny Todos flutter"]
         }
     }
 
