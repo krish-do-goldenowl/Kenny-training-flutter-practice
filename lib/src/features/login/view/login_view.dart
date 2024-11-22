@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/widgets/forms/register_form.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myapp/src/theme/styles.dart';
+
+import 'package:myapp/widgets/forms/login_form.dart';
 import 'package:myapp/widgets/layout/base_layout.dart';
 
-class RegisterView extends StatelessWidget {
-  RegisterView({super.key});
+class LoginView extends StatelessWidget {
+  LoginView({super.key});
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -17,14 +20,14 @@ class RegisterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
-      buttonText: 'Register',
+      buttonText: 'Login',
       onButtonPressed: submitForm,
       content: Column(
         children: [
           Column(
             children: [
               const Text(
-                'Welcome to Onboard!',
+                'Welcome Back',
                 style: TextStyle(
                   fontFamily: 'Poppins',
                   fontWeight: FontWeight.bold,
@@ -33,22 +36,20 @@ class RegisterView extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              const SizedBox(
-                width: 200,
-                child: Text("Let's help to meet up your tasks.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.normal,
-                        fontSize: 13)),
-              ),
+              SvgPicture.asset('assets/svgs/login_screen_bg.svg',
+                  semanticsLabel: "Login bg image", width: 200),
+              const SizedBox(height: 40),
+              LoginForm(formKey: formKey),
               const SizedBox(height: 30),
-              RegisterForm(formKey: formKey)
+              const Text(
+                'Forget password?',
+                style: AppStyles.highLightText,
+              )
             ],
           )
         ],
       ),
-      currentView: 'register',
+      currentView: 'login',
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:myapp/src/features/login/view/login_view.dart';
 import 'package:myapp/src/features/register/view/register_view.dart';
 import 'package:myapp/src/features/splashScreen/view/splash_screen_view.dart';
 
@@ -29,7 +30,12 @@ class AppRouter {
           path: AppRouteNames.register.path,
           name: AppRouteNames.register.name,
           builder: (BuildContext context, GoRouterState state) =>
-              const RegisterView()),
+              RegisterView()),
+      GoRoute(
+          parentNavigatorKey: AppCoordinator.navigatorKey,
+          path: AppRouteNames.login.path,
+          name: AppRouteNames.login.name,
+          builder: (BuildContext context, GoRouterState state) => LoginView()),
     ],
     errorBuilder: (_, __) => const NotFoundView(),
   );
