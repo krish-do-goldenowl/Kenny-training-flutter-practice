@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myapp/gen/assets.gen.dart';
+import 'package:myapp/src/config/constants/enums.dart';
+import 'package:myapp/src/router/coordinator.dart';
 import 'package:myapp/src/theme/styles.dart';
 
 import 'package:myapp/widgets/forms/login_form.dart';
@@ -17,26 +20,23 @@ class LoginView extends StatelessWidget {
     }
   }
 
+  void onTapPressed() {
+    AppCoordinator.showRegisterScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
       buttonText: 'Login',
       onButtonPressed: submitForm,
+      onTapPressed: onTapPressed,
       content: Column(
         children: [
           Column(
             children: [
-              const Text(
-                'Welcome Back',
-                style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  height: 1.5,
-                ),
-              ),
+              const Text('Welcome Back', style: AppStyles.boldText),
               const SizedBox(height: 30),
-              SvgPicture.asset('assets/svgs/login_screen_bg.svg',
+              SvgPicture.asset(Assets.svgs.loginScreenBg,
                   semanticsLabel: "Login bg image", width: 200),
               const SizedBox(height: 40),
               LoginForm(formKey: formKey),
@@ -49,7 +49,7 @@ class LoginView extends StatelessWidget {
           )
         ],
       ),
-      currentView: 'login',
+      currentView: CurrentView.login,
     );
   }
 }

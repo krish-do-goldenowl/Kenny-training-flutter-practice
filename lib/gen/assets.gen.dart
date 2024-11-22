@@ -12,7 +12,10 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// Directory path: assets/images/images
   $AssetsImagesImagesGen get images => const $AssetsImagesImagesGen();
+
+  /// Directory path: assets/images/locale
   $AssetsImagesLocaleGen get locale => const $AssetsImagesLocaleGen();
 }
 
@@ -32,6 +35,18 @@ class $AssetsLottiesGen {
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
 
+  /// File path: assets/svgs/add_icon.svg
+  String get addIcon => 'assets/svgs/add_icon.svg';
+
+  /// File path: assets/svgs/clock.svg
+  String get clock => 'assets/svgs/clock.svg';
+
+  /// File path: assets/svgs/duplicate_circles.svg
+  String get duplicateCircles => 'assets/svgs/duplicate_circles.svg';
+
+  /// File path: assets/svgs/duplicate_circles_alt.svg
+  String get duplicateCirclesAlt => 'assets/svgs/duplicate_circles_alt.svg';
+
   /// File path: assets/svgs/empty_photo.svg
   String get emptyPhoto => 'assets/svgs/empty_photo.svg';
 
@@ -43,6 +58,12 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/ic_google.svg
   String get icGoogle => 'assets/svgs/ic_google.svg';
+
+  /// File path: assets/svgs/login_screen_bg.svg
+  String get loginScreenBg => 'assets/svgs/login_screen_bg.svg';
+
+  /// File path: assets/svgs/splash_screen_bg.svg
+  String get splashScreenBg => 'assets/svgs/splash_screen_bg.svg';
 
   /// File path: assets/svgs/state_empty.svg
   String get stateEmpty => 'assets/svgs/state_empty.svg';
@@ -59,10 +80,16 @@ class $AssetsSvgsGen {
 
   /// List of all assets
   List<String> get values => [
+        addIcon,
+        clock,
+        duplicateCircles,
+        duplicateCirclesAlt,
         emptyPhoto,
         icApple,
         icFacebook,
         icGoogle,
+        loginScreenBg,
+        splashScreenBg,
         stateEmpty,
         stateEmptyMap,
         stateEmptyNotification,
@@ -103,9 +130,16 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
 
   Image image({
     Key? key,
@@ -125,7 +159,7 @@ class AssetGenImage {
     ImageRepeat repeat = ImageRepeat.noRepeat,
     Rect? centerSlice,
     bool matchTextDirection = false,
-    bool gaplessPlayback = false,
+    bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
     FilterQuality filterQuality = FilterQuality.low,

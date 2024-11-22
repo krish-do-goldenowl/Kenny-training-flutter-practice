@@ -30,11 +30,24 @@ class AppStyles {
     fontWeight: FontWeight.normal,
   );
 
+  static const smallText = TextStyle(
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.normal,
+    fontSize: 13,
+  );
+
   static const normalText = TextStyle(
       fontFamily: 'Poppins',
       fontSize: 16,
       fontWeight: FontWeight.w400,
       color: Colors.black);
+
+  static const boldText = TextStyle(
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
+    height: 1.5,
+  );
 
   static const highLightText = TextStyle(
     fontFamily: 'Poppins',

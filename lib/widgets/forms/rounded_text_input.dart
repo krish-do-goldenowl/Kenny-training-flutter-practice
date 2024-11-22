@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/src/theme/styles.dart';
 
 class RoundedTextFormField extends StatelessWidget {
   final String hintText;
@@ -23,11 +24,8 @@ class RoundedTextFormField extends StatelessWidget {
       child: TextFormField(
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: const TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
-              color: Color(0xCC000000)),
+          hintStyle:
+              AppStyles.smallText.copyWith(color: const Color(0xCC000000)),
           border: InputBorder.none,
         ),
         obscureText: obscureText!,

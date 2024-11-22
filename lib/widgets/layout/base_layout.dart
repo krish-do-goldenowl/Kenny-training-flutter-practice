@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myapp/gen/assets.gen.dart';
+import 'package:myapp/src/config/constants/enums.dart';
 
-import 'package:myapp/src/router/coordinator.dart';
 import 'package:myapp/src/theme/styles.dart';
 import 'package:myapp/widgets/button/custom_button.dart';
 
@@ -10,23 +11,16 @@ class BaseLayout extends StatelessWidget {
   final String buttonText;
   final VoidCallback onButtonPressed;
   final Widget content;
-  final String? currentView;
+  final CurrentView? currentView;
+  final VoidCallback? onTapPressed;
 
-  const BaseLayout({
-    super.key,
-    required this.buttonText,
-    required this.onButtonPressed,
-    required this.content,
-    this.currentView,
-  });
-
-  void _onSignInPressed() {
-    AppCoordinator.showLoginScreen();
-  }
-
-  void _onSignUpPressed() {
-    AppCoordinator.showRegisterScreen();
-  }
+  const BaseLayout(
+      {super.key,
+      required this.buttonText,
+      required this.onButtonPressed,
+      required this.content,
+      this.currentView,
+      this.onTapPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +40,7 @@ class BaseLayout extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: SvgPicture.asset(
-                      'assets/svgs/duplicate_circles.svg',
+                      Assets.svgs.duplicateCircles,
                       semanticsLabel: "Duplicate circles",
                       width: 150,
                     ),
@@ -60,7 +54,7 @@ class BaseLayout extends StatelessWidget {
                       onButtonPressed: onButtonPressed,
                     ),
                     const SizedBox(height: 30),
-                    if (currentView == 'register') ...[
+                    if (currentView == CurrentView.register) ...[
                       RichText(
                         text: TextSpan(
                           style: AppStyles.normalText,
@@ -72,11 +66,11 @@ class BaseLayout extends StatelessWidget {
                                 text: 'Sign In',
                                 style: AppStyles.highLightText,
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = _onSignInPressed),
+                                  ..onTap = onTapPressed),
                           ],
                         ),
                       ),
-                    ] else if (currentView == 'login') ...[
+                    ] else if (currentView == CurrentView.login) ...[
                       RichText(
                         text: TextSpan(
                           style: AppStyles.normalText,
@@ -88,7 +82,7 @@ class BaseLayout extends StatelessWidget {
                                 text: 'Sign Up',
                                 style: AppStyles.highLightText,
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = _onSignUpPressed),
+                                  ..onTap = onTapPressed),
                           ],
                         ),
                       ),

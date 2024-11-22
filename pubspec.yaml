@@ -88,7 +88,7 @@ flutter:
   generate: true
 
   assets:
-    # Add assets from the images directory to the application.
+    # Add assets from the images directory to the application, these also used for flutter gen
     - assets/images/
     - assets/images/images/
     - assets/images/locale/
