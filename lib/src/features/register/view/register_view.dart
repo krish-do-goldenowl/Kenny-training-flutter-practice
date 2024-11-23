@@ -17,9 +17,29 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterCubit, RegisterState>(
-        builder: (BuildContext context, RegisterState state) {
-      final registerCubit = context.read<RegisterCubit>();
+    final registerCubit = context.read<RegisterCubit>();
+
+    return BlocConsumer<RegisterCubit, RegisterState>(
+        listener: (BuildContext context, RegisterState state) {
+      if (state.isSuccess != null && state.isSuccess!) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Registration successful!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  registerCubit.resetForm();
+                  AppCoordinator.showLoginScreen();
+                },
+                child: const Text('OK'),
+              )
+            ],
+          ),
+        );
+      }
+    }, builder: (BuildContext context, RegisterState state) {
       return BaseLayout(
         buttonText: 'Register',
         onButtonPressed: registerCubit.handleRegister,

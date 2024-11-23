@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapp/src/network/model/auth_response.dart';
-import 'package:myapp/src/router/coordinator.dart';
 import 'package:myapp/src/services/firebase_authentication.dart';
 
 part './register_state.dart';
@@ -34,7 +33,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         password: '',
         confirmPassword: '',
         errorMessage: null,
-        isLoading: false));
+        isSuccess: false));
   }
 
   Future<void> handleRegister() async {
@@ -42,15 +41,13 @@ class RegisterCubit extends Cubit<RegisterState> {
       emit(state.copyWith(errorMessage: defaultErrorMessage));
       return;
     }
-    emit(state.copyWith(isLoading: true));
 
     final AuthResponse result = await _firebaseAuth.registerByEmailAndPassword(
         email: state.email, password: state.password);
     if (result.message != null && result.message!.isNotEmpty) {
-      emit(state.copyWith(errorMessage: result.message, isLoading: false));
+      emit(state.copyWith(errorMessage: result.message, isSuccess: false));
     } else {
-      resetForm();
-      AppCoordinator.showLoginScreen();
+      emit(state.copyWith(isSuccess: true));
     }
   }
 }

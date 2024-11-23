@@ -6,7 +6,7 @@ class RegisterState {
   final String password;
   final String confirmPassword;
   final String? errorMessage;
-  final bool? isLoading;
+  final bool? isSuccess;
 
   RegisterState(
       {this.fullName = '',
@@ -14,7 +14,7 @@ class RegisterState {
       this.password = '',
       this.confirmPassword = '',
       this.errorMessage,
-      this.isLoading = false});
+      this.isSuccess = false});
 
   RegisterState copyWith(
       {String? fullName,
@@ -22,13 +22,13 @@ class RegisterState {
       String? password,
       String? confirmPassword,
       String? errorMessage,
-      bool? isLoading}) {
+      bool? isSuccess}) {
     return RegisterState(
         fullName: fullName ?? this.fullName,
         email: email ?? this.email,
         password: password ?? this.password,
         confirmPassword: confirmPassword ?? this.confirmPassword,
         errorMessage: errorMessage,
-        isLoading: isLoading ?? this.isLoading);
+        isSuccess: isSuccess ?? this.isSuccess);
   }
 }
