@@ -23,6 +23,7 @@ class RegisterView extends StatelessWidget {
         listener: (BuildContext context, RegisterState state) {
       if (state.isSuccess != null && state.isSuccess!) {
         showDialog(
+          barrierDismissible: false, // prevent click outside
           context: context,
           builder: (context) => AlertDialog(
             title: const Text('Success'),

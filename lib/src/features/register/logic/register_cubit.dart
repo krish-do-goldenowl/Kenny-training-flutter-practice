@@ -43,7 +43,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
 
     final AuthResponse result = await _firebaseAuth.registerByEmailAndPassword(
-        email: state.email, password: state.password);
+        email: state.email, password: state.password, fullName: state.fullName);
     if (result.message != null && result.message!.isNotEmpty) {
       emit(state.copyWith(errorMessage: result.message, isSuccess: false));
     } else {
