@@ -5,12 +5,15 @@ class RoundedTextFormField extends StatelessWidget {
   final String hintText;
   final String? Function(String?)? validator;
   final bool? obscureText;
+  final TextEditingController? controller;
 
-  const RoundedTextFormField(
-      {super.key,
-      required this.hintText,
-      this.validator,
-      this.obscureText = false});
+  const RoundedTextFormField({
+    super.key,
+    required this.hintText,
+    this.validator,
+    this.obscureText = false,
+    this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +33,7 @@ class RoundedTextFormField extends StatelessWidget {
         ),
         obscureText: obscureText!,
         validator: validator,
+        controller: controller,
       ),
     );
   }

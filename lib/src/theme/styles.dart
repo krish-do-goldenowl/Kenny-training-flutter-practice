@@ -42,6 +42,12 @@ class AppStyles {
       fontWeight: FontWeight.w400,
       color: Colors.black);
 
+  static const semiBoldText = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+  );
+
   static const boldText = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,

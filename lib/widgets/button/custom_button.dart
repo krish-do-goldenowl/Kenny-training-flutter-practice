@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/src/theme/styles.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;
   final VoidCallback onButtonPressed;
+  final bool? isLoading;
 
   const CustomButton(
-      {super.key, required this.title, required this.onButtonPressed});
+      {super.key,
+      required this.title,
+      required this.onButtonPressed,
+      this.isLoading});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +27,7 @@ class CustomButton extends StatelessWidget {
         ),
         child: Text(
           title,
-          style: const TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
+          style: AppStyles.semiBoldText.copyWith(
             color: Colors.white,
           ),
         ),
