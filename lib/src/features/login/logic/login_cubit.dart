@@ -18,6 +18,10 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(password: password));
   }
 
+  void resetState() {
+    emit(const LoginState());
+  }
+
   Future<void> handleLogin() async {
     emit(state.copyWith(status: AuthStatus.loading));
 
@@ -29,6 +33,7 @@ class LoginCubit extends Cubit<LoginState> {
 
       if (response.ok != null && response.ok!) {
         AppCoordinator.showDashboardScreen();
+        resetState();
       } else {
         emit(state.copyWith(
           status: AuthStatus.failure,

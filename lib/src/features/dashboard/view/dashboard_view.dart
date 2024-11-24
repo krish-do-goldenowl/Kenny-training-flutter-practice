@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myapp/gen/assets.gen.dart';
 import 'package:myapp/src/network/model/users.dart';
+import 'package:myapp/src/router/coordinator.dart';
 import 'package:myapp/src/theme/colors.dart';
 import 'package:myapp/src/services/firebase_authentication.dart';
+import 'package:myapp/src/theme/styles.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
@@ -22,6 +24,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     setState(() {
       user = userDetails;
     });
+  }
+
+  Future<void> _handleLogout() async {
+    await _authServices.signOut();
+    AppCoordinator.showLoginScreen();
   }
 
   @override
@@ -56,6 +63,21 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             ),
                           ),
                           Align(
+                            alignment: Alignment.topRight,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 10, top: 10),
+                              child: GestureDetector(
+                                onTap: _handleLogout,
+                                child: Text(
+                                  'Log out',
+                                  style: AppStyles.semiBoldText
+                                      .copyWith(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
                             alignment: Alignment.center,
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -69,12 +91,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  'Welcome, ${user!.fullName}', // user is now guaranteed to be non-null
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
+                                  'Welcome, ${user!.fullName}',
+                                  style: AppStyles.boldText
+                                      .copyWith(color: Colors.white),
                                 ),
                               ],
                             ),
