@@ -9,6 +9,8 @@ class FirebaseAuthenticationServices {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  User? get currentUser => _firebaseAuth.currentUser;
+
   Future<AuthResponse> registerByEmailAndPassword(
       {required String email,
       required String password,
