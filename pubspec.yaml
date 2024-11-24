@@ -94,6 +94,7 @@ flutter:
     - assets/images/locale/
     - assets/lotties/
     - assets/svgs/
+    - assets/pngs/
 
   fonts:
     - family: Poppins

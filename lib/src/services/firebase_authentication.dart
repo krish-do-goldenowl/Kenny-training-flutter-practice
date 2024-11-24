@@ -44,4 +44,26 @@ class FirebaseAuthenticationServices {
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
+
+  Future<Users?> getUserDetails() async {
+    try {
+      final uid = currentUser?.uid;
+      if (uid == null) {
+        throw Exception("No user is currently signed in.");
+      }
+
+      final doc = await _firestore
+          .collection(AppConstants.firestoreCollections.userCollection)
+          .doc(uid)
+          .get();
+
+      if (!doc.exists) {
+        throw Exception("User not found in Firestore.");
+      }
+
+      return Users.fromMap(doc.data()!);
+    } catch (e) {
+      return null;
+    }
+  }
 }
