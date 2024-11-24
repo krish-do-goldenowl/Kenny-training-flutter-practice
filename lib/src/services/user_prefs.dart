@@ -10,6 +10,7 @@ class _keys {
   static const String theme = 'app-theme';
   static const String user = 'user';
   static const String token = 'token';
+  static const String isAppGetStarted = 'is-app-get-started';
 }
 
 class UserPrefs {
@@ -77,5 +78,14 @@ class UserPrefs {
       xLog.e(e);
       return null;
     }
+  }
+
+  // splash screen
+  bool isSplashScreenStarted() {
+    return _prefs.getBool(_keys.isAppGetStarted) ?? false;
+  }
+
+  void setSplashScreenStarted(bool value) {
+    _prefs.setBool(_keys.isAppGetStarted, value);
   }
 }

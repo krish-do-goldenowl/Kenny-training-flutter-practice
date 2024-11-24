@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:myapp/src/features/login/view/login_view.dart';
 import 'package:myapp/src/features/register/view/register_view.dart';
 import 'package:myapp/src/features/splashScreen/view/splash_screen_view.dart';
+import 'package:myapp/src/services/user_prefs.dart';
 
 import '../features/common/view/not_found_view.dart';
 
@@ -15,7 +16,9 @@ import 'route_name.dart';
 class AppRouter {
   late final router = GoRouter(
     navigatorKey: AppCoordinator.navigatorKey,
-    initialLocation: AppRouteNames.splashScreen.path,
+    initialLocation: UserPrefs.I.isSplashScreenStarted()
+        ? AppRouteNames.login.path
+        : AppRouteNames.splashScreen.path,
     debugLogDiagnostics: kDebugMode,
     observers: [BotToastNavigatorObserver()],
     routes: <RouteBase>[
