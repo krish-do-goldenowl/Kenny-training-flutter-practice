@@ -29,7 +29,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider(create: (_) => SettingBloc()),
         BlocProvider(create: (_) => GetIt.I<AccountBloc>()),
-        BlocProvider(create: (_) => LoginCubit()),
+        BlocProvider(
+            create: (_) =>
+                LoginCubit(GetIt.I<FirebaseAuthenticationServices>())),
         BlocProvider(
           create: (_) =>
               RegisterCubit(GetIt.I<FirebaseAuthenticationServices>()),

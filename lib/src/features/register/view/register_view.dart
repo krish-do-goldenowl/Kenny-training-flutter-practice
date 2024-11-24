@@ -21,7 +21,7 @@ class RegisterView extends StatelessWidget {
 
     return BlocConsumer<RegisterCubit, RegisterState>(
         listener: (BuildContext context, RegisterState state) {
-      if (state.isSuccess != null && state.isSuccess!) {
+      if (state.status == AuthStatus.success) {
         showDialog(
           barrierDismissible: false, // prevent click outside
           context: context,
@@ -45,6 +45,7 @@ class RegisterView extends StatelessWidget {
         buttonText: 'Register',
         onButtonPressed: registerCubit.handleRegister,
         onTapPressed: onTapPressed,
+        isLoading: state.status,
         content: Column(
           children: [
             Column(

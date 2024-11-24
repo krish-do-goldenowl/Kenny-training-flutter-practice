@@ -2,6 +2,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myapp/src/features/dashboard/view/dashboard_view.dart';
 
 import 'package:myapp/src/features/login/view/login_view.dart';
 import 'package:myapp/src/features/register/view/register_view.dart';
@@ -39,6 +40,12 @@ class AppRouter {
           path: AppRouteNames.login.path,
           name: AppRouteNames.login.name,
           builder: (BuildContext context, GoRouterState state) => LoginView()),
+      GoRoute(
+          parentNavigatorKey: AppCoordinator.navigatorKey,
+          path: AppRouteNames.dashboard.path,
+          name: AppRouteNames.dashboard.name,
+          builder: (BuildContext context, GoRouterState state) =>
+              const DashBoardScreen())
     ],
     errorBuilder: (_, __) => const NotFoundView(),
   );

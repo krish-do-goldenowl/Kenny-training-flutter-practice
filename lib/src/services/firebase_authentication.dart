@@ -28,14 +28,14 @@ class FirebaseAuthenticationServices {
     }
   }
 
-  Future<String?> loginByEmailAndPassword(
+  Future<AuthResponse> loginByEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      return 'User logged in successfully';
+      return AuthResponse(userCredentail: result, ok: true);
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      return AuthResponse(message: e.message, ok: false);
     }
   }
 

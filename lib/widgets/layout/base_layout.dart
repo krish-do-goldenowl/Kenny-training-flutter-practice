@@ -13,7 +13,7 @@ class BaseLayout extends StatelessWidget {
   final Widget content;
   final CurrentView? currentView;
   final VoidCallback? onTapPressed;
-  final bool? isLoading;
+  final AuthStatus? isLoading;
 
   const BaseLayout(
       {super.key,
@@ -48,7 +48,11 @@ class BaseLayout extends StatelessWidget {
                     ),
                   ),
                 ),
-                content,
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: content,
+                  ),
+                ),
                 Column(
                   children: [
                     CustomButton(
