@@ -19,65 +19,49 @@ class RegisterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final registerCubit = context.read<RegisterCubit>();
 
-    return BlocConsumer<RegisterCubit, RegisterState>(
-        listener: (BuildContext context, RegisterState state) {
-      if (state.status == AuthStatus.success) {
-        showDialog(
-          barrierDismissible: false, // prevent click outside
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Success'),
-            content: const Text('Registration successful!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  registerCubit.resetForm();
-                  AppCoordinator.showLoginScreen();
-                },
-                child: const Text('OK'),
-              )
-            ],
-          ),
-        );
-      }
-    }, builder: (BuildContext context, RegisterState state) {
-      return BaseLayout(
-        buttonText: 'Register',
-        onButtonPressed: registerCubit.handleRegister,
-        onTapPressed: onTapPressed,
-        isLoading: state.status,
-        content: Column(
-          children: [
-            Column(
+    return BlocBuilder<RegisterCubit, RegisterState>(
+        buildWhen: (previous, current) =>
+            previous.errorMessage != current.errorMessage ||
+            previous.status != current.status,
+        builder: (BuildContext context, RegisterState state) {
+          return BaseLayout(
+            buttonText: 'Register',
+            onButtonPressed: () => registerCubit.handleRegister(context),
+            onTapPressed: onTapPressed,
+            isLoading: state.status,
+            content: Column(
               children: [
-                const Text(
-                  'Welcome to Onboard!',
-                  style: AppStyles.boldText,
-                ),
-                const SizedBox(height: 30),
-                const SizedBox(
-                  width: 200,
-                  child: Text("Let's help to meet up your tasks.",
-                      textAlign: TextAlign.center, style: AppStyles.smallText),
-                ),
-                const SizedBox(height: 30),
-                RegisterForm(
-                  formKey: formKey,
-                ),
-                if (state.errorMessage != null) ...[
-                  const SizedBox(height: 20),
-                  Text(
-                    state.errorMessage!,
-                    style: AppStyles.smallText.copyWith(color: Colors.red),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+                Column(
+                  children: [
+                    const Text(
+                      'Welcome to Onboard!',
+                      style: AppStyles.boldText,
+                    ),
+                    const SizedBox(height: 30),
+                    const SizedBox(
+                      width: 200,
+                      child: Text("Let's help to meet up your tasks.",
+                          textAlign: TextAlign.center,
+                          style: AppStyles.smallText),
+                    ),
+                    const SizedBox(height: 30),
+                    RegisterForm(
+                      formKey: formKey,
+                    ),
+                    if (state.errorMessage != null) ...[
+                      const SizedBox(height: 20),
+                      Text(
+                        state.errorMessage!,
+                        style: AppStyles.smallText.copyWith(color: Colors.red),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ],
+                )
               ],
-            )
-          ],
-        ),
-        currentView: CurrentView.register,
-      );
-    });
+            ),
+            currentView: CurrentView.register,
+          );
+        });
   }
 }
