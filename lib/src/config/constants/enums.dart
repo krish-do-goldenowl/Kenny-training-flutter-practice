@@ -1,0 +1,4 @@
+enum CurrentView {
+  register,
+  login,
+}

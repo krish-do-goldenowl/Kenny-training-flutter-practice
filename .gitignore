@@ -9,6 +9,9 @@
 .history
 .svn/
 
+# Custom scripts
+run_staging.sh
+
 # IntelliJ related
 *.iml
 *.ipr

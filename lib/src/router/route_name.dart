@@ -1,4 +1,10 @@
 enum AppRouteNames {
+  // app todos routes
+  splashScreen(path: '/splash-screen'),
+  register(path: '/register'),
+  login(path: '/login'),
+  dashboard(path: '/dashboard'),
+  // template routes
   home(path: '/'),
   dev(path: '/dev'),
   account(path: '/account'),
