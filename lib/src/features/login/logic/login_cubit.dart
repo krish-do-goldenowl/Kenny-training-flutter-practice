@@ -32,6 +32,7 @@ class LoginCubit extends Cubit<LoginState> {
       );
 
       if (response.ok != null && response.ok!) {
+        emit(state.copyWith(status: AuthStatus.success));
         AppCoordinator.showDashboardScreen();
         resetState();
       } else {
