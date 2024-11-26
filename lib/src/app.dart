@@ -8,6 +8,7 @@ import 'package:myapp/src/features/login/logic/login_cubit.dart';
 import 'package:myapp/src/features/register/logic/register_cubit.dart';
 import 'package:myapp/src/features/settings/logic/setting_bloc.dart';
 import 'package:myapp/src/router/router.dart';
+import 'package:myapp/src/services/firebase_authentication.dart';
 import 'package:myapp/src/theme/screen.dart';
 import 'package:myapp/src/theme/themes.dart';
 import 'package:myapp/src/localization/localization_utils.dart';
@@ -29,7 +30,10 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => SettingBloc()),
         BlocProvider(create: (_) => GetIt.I<AccountBloc>()),
         BlocProvider(create: (_) => LoginCubit()),
-        BlocProvider(create: (_) => RegisterCubit())
+        BlocProvider(
+          create: (_) =>
+              RegisterCubit(GetIt.I<FirebaseAuthenticationServices>()),
+        ),
       ],
       child: BlocBuilder<SettingBloc, SettingState>(builder: (context, state) {
         return MaterialApp.router(

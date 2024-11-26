@@ -4,25 +4,24 @@
       "android": {
         "default": {
           "projectId": "flutter-todo-9f102",
-          "appId": "1:70183454754:android:bc807c115b5f4216ade27b",
+          "appId": "1:70183454754:android:0b92a0eb9b421497ade27b",
           "fileOutput": "android/app/google-services.json"
         }
       },
       "ios": {
         "default": {
           "projectId": "flutter-todo-9f102",
-          "appId": "1:70183454754:ios:d777144a24a11a92ade27b",
+          "appId": "1:70183454754:ios:2f660e5472804ef0ade27b",
           "uploadDebugSymbols": true,
           "fileOutput": "ios/Runner/GoogleService-Info.plist"
         }
       },
       "dart": {
-        "lib/firebase_options.dart": {
+        "lib/firebase_options/firebase_options_stg.dart": {
           "projectId": "flutter-todo-9f102",
           "configurations": {
-            "android": "1:70183454754:android:bc807c115b5f4216ade27b",
-            "ios": "1:70183454754:ios:d777144a24a11a92ade27b",
-            "web": "1:70183454754:web:6cb0619f7a858e9aade27b"
+            "android": "1:70183454754:android:0b92a0eb9b421497ade27b",
+            "ios": "1:70183454754:ios:2f660e5472804ef0ade27b"
           }
         }
       }

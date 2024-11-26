@@ -13,6 +13,7 @@ class BaseLayout extends StatelessWidget {
   final Widget content;
   final CurrentView? currentView;
   final VoidCallback? onTapPressed;
+  final bool? isLoading;
 
   const BaseLayout(
       {super.key,
@@ -20,7 +21,8 @@ class BaseLayout extends StatelessWidget {
       required this.onButtonPressed,
       required this.content,
       this.currentView,
-      this.onTapPressed});
+      this.onTapPressed,
+      this.isLoading});
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +52,9 @@ class BaseLayout extends StatelessWidget {
                 Column(
                   children: [
                     CustomButton(
-                      title: buttonText,
-                      onButtonPressed: onButtonPressed,
-                    ),
+                        title: buttonText,
+                        onButtonPressed: onButtonPressed,
+                        isLoading: isLoading),
                     const SizedBox(height: 30),
                     if (currentView == CurrentView.register) ...[
                       RichText(

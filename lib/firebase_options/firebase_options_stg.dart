@@ -57,18 +57,18 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBJgaZWVRxB-SApTnFre41PwTK8e6OJUNw',
-    appId: '1:70183454754:android:bc807c115b5f4216ade27b',
+    appId: '1:70183454754:android:0b92a0eb9b421497ade27b',
     messagingSenderId: '70183454754',
     projectId: 'flutter-todo-9f102',
-    storageBucket: 'flutter-todo-9f102.appspot.com',
+    storageBucket: 'flutter-todo-9f102.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCv6rozzSOCvTVU2TtTf8QA59tQSDRS_Wc',
-    appId: '1:70183454754:ios:d777144a24a11a92ade27b',
+    appId: '1:70183454754:ios:2f660e5472804ef0ade27b',
     messagingSenderId: '70183454754',
     projectId: 'flutter-todo-9f102',
-    storageBucket: 'flutter-todo-9f102.appspot.com',
+    storageBucket: 'flutter-todo-9f102.firebasestorage.app',
     iosClientId:
         '70183454754-furpvmqm4gu6kpaunhlr54cgl6ll4l1v.apps.googleusercontent.com',
     iosBundleId: 'todo.app.stg',
