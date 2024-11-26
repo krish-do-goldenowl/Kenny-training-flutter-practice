@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myapp/gen/assets.gen.dart';
+import 'package:myapp/src/features/dashboard/widget/clock.dart';
+import 'package:myapp/src/features/dashboard/widget/todo_list.dart';
 import 'package:myapp/src/network/model/users.dart';
 import 'package:myapp/src/router/coordinator.dart';
 import 'package:myapp/src/theme/colors.dart';
@@ -18,6 +20,16 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   final FirebaseAuthenticationServices _authServices =
       FirebaseAuthenticationServices();
   Users? user;
+
+  String getCurrentTime() {
+    final DateTime now = DateTime.now();
+    final int hour = now.hour;
+    return hour < 12
+        ? 'Good Morning'
+        : hour < 17
+            ? 'Good Afternoon'
+            : 'Good Evening';
+  }
 
   Future<void> _fetchUserDetails() async {
     final userDetails = await _authServices.getUserDetails();
@@ -101,8 +113,46 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    const Text('DashBoard Screen'),
+                    Expanded(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 15, left: 15, right: 15),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Spacer(),
+                                  Text(
+                                    getCurrentTime(),
+                                    style: AppStyles.semiBoldText
+                                        .copyWith(fontSize: 12),
+                                  ),
+                                ],
+                              ),
+                              const CurrentClock(),
+                              const SizedBox(height: 15),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Task list',
+                                    style: AppStyles.semiBoldText.copyWith(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 15),
+                              const TodoList()
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
