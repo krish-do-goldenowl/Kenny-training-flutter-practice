@@ -22,12 +22,13 @@ class RegisterView extends StatelessWidget {
     return BlocBuilder<RegisterCubit, RegisterState>(
         buildWhen: (previous, current) =>
             previous.errorMessage != current.errorMessage ||
-            previous.isSuccess != current.isSuccess,
+            previous.status != current.status,
         builder: (BuildContext context, RegisterState state) {
           return BaseLayout(
             buttonText: 'Register',
             onButtonPressed: () => registerCubit.handleRegister(context),
             onTapPressed: onTapPressed,
+            isLoading: state.status,
             content: Column(
               children: [
                 Column(

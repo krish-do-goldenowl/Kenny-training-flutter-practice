@@ -28,6 +28,8 @@ class AppCoordinator {
   static void showRegisterScreen() =>
       context.goNamed(AppRouteNames.register.name);
   static void showLoginScreen() => context.goNamed(AppRouteNames.login.name);
+  static void showDashboardScreen() =>
+      context.goNamed(AppRouteNames.dashboard.name);
 
   // navigate from template
   static void showHomeScreen() => context.goNamed(AppRouteNames.home.name);

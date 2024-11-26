@@ -6,7 +6,7 @@ class RegisterState {
   final String password;
   final String confirmPassword;
   final String? errorMessage;
-  final bool? isSuccess;
+  final AuthStatus? status;
 
   RegisterState(
       {this.fullName = '',
@@ -14,7 +14,7 @@ class RegisterState {
       this.password = '',
       this.confirmPassword = '',
       this.errorMessage,
-      this.isSuccess = false});
+      this.status = AuthStatus.initial});
 
   RegisterState copyWith(
       {String? fullName,
@@ -22,13 +22,14 @@ class RegisterState {
       String? password,
       String? confirmPassword,
       String? errorMessage,
-      bool? isSuccess}) {
+      AuthStatus? status}) {
     return RegisterState(
-        fullName: fullName ?? this.fullName,
-        email: email ?? this.email,
-        password: password ?? this.password,
-        confirmPassword: confirmPassword ?? this.confirmPassword,
-        errorMessage: errorMessage,
-        isSuccess: isSuccess ?? this.isSuccess);
+      fullName: fullName ?? this.fullName,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      confirmPassword: confirmPassword ?? this.confirmPassword,
+      errorMessage: errorMessage,
+      status: status ?? status,
+    );
   }
 }

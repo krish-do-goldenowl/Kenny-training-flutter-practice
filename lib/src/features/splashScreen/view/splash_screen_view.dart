@@ -3,17 +3,23 @@ import 'package:flutter_svg/svg.dart';
 import 'package:myapp/gen/assets.gen.dart';
 
 import 'package:myapp/src/router/coordinator.dart';
+import 'package:myapp/src/services/user_prefs.dart';
 import 'package:myapp/src/theme/styles.dart';
 import 'package:myapp/widgets/layout/base_layout.dart';
 
 class SplashScreenView extends StatelessWidget {
   const SplashScreenView({super.key});
 
+  void _onButtonPressed() {
+    UserPrefs.I.setSplashScreenStarted(true);
+    AppCoordinator.showRegisterScreen();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BaseLayout(
       buttonText: 'Get started',
-      onButtonPressed: () => AppCoordinator.showRegisterScreen(),
+      onButtonPressed: _onButtonPressed,
       content: Column(
         children: [
           SvgPicture.asset(Assets.svgs.splashScreenBg,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myapp/src/config/constants/enums.dart';
 import 'package:myapp/src/network/model/auth_response.dart';
 import 'package:myapp/src/router/coordinator.dart';
 import 'package:myapp/src/services/firebase_authentication.dart';
@@ -35,7 +36,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         password: '',
         confirmPassword: '',
         errorMessage: null,
-        isSuccess: false));
+        status: AuthStatus.initial));
   }
 
   void _showSuccessDialog(BuildContext context) {
@@ -58,6 +59,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   Future<void> handleRegister(BuildContext context) async {
+    emit(state.copyWith(status: AuthStatus.loading));
     if (!isPasswordMatch) {
       emit(state.copyWith(errorMessage: defaultErrorMessage));
       return;
@@ -66,9 +68,10 @@ class RegisterCubit extends Cubit<RegisterState> {
     final AuthResponse result = await _firebaseAuth.registerByEmailAndPassword(
         email: state.email, password: state.password, fullName: state.fullName);
     if (result.message != null && result.message!.isNotEmpty) {
-      emit(state.copyWith(errorMessage: result.message, isSuccess: false));
+      emit(state.copyWith(
+          errorMessage: result.message, status: AuthStatus.failure));
     } else {
-      emit(state.copyWith(isSuccess: true));
+      emit(state.copyWith(status: AuthStatus.success));
       if (context.mounted) _showSuccessDialog(context);
     }
   }

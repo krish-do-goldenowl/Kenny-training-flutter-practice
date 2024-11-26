@@ -2,10 +2,12 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myapp/src/features/dashboard/view/dashboard_view.dart';
 
 import 'package:myapp/src/features/login/view/login_view.dart';
 import 'package:myapp/src/features/register/view/register_view.dart';
 import 'package:myapp/src/features/splashScreen/view/splash_screen_view.dart';
+import 'package:myapp/src/services/user_prefs.dart';
 
 import '../features/common/view/not_found_view.dart';
 
@@ -15,7 +17,9 @@ import 'route_name.dart';
 class AppRouter {
   late final router = GoRouter(
     navigatorKey: AppCoordinator.navigatorKey,
-    initialLocation: AppRouteNames.splashScreen.path,
+    initialLocation: UserPrefs.I.isSplashScreenStarted()
+        ? AppRouteNames.login.path
+        : AppRouteNames.splashScreen.path,
     debugLogDiagnostics: kDebugMode,
     observers: [BotToastNavigatorObserver()],
     routes: <RouteBase>[
@@ -36,6 +40,12 @@ class AppRouter {
           path: AppRouteNames.login.path,
           name: AppRouteNames.login.name,
           builder: (BuildContext context, GoRouterState state) => LoginView()),
+      GoRoute(
+          parentNavigatorKey: AppCoordinator.navigatorKey,
+          path: AppRouteNames.dashboard.path,
+          name: AppRouteNames.dashboard.name,
+          builder: (BuildContext context, GoRouterState state) =>
+              const DashBoardScreen())
     ],
     errorBuilder: (_, __) => const NotFoundView(),
   );
