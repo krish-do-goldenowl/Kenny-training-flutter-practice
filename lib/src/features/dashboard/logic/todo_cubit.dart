@@ -10,7 +10,7 @@ class TodoCubit extends Cubit<TodoState> {
   final TodoService _todoService;
   TodoCubit(this._todoService) : super(const TodoState());
   final Logger logger = Logger();
-  final String uuid = UserPrefs.I.getUserId();
+  String get uuid => UserPrefs.I.getUserId();
 
   Future<void> fetchTodos() async {
     emit(state.copyWith(isLoading: true));

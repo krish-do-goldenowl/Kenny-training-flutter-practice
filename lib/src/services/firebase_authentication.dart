@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:myapp/src/config/constants/constants.dart';
 import 'package:myapp/src/network/model/auth_response.dart';
 import 'package:myapp/src/network/model/users.dart';
+import 'package:myapp/src/services/user_prefs.dart';
 
 class FirebaseAuthenticationServices {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -42,6 +43,7 @@ class FirebaseAuthenticationServices {
   }
 
   Future<void> signOut() async {
+    UserPrefs.I.setUserId(null);
     await _firebaseAuth.signOut();
   }
 
