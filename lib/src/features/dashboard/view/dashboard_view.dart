@@ -62,7 +62,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: screenHeight / 3,
+                      height: screenHeight / 4,
                       color: AppColors.textHighLight,
                       child: Stack(
                         children: [
@@ -94,14 +94,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const SizedBox(height: 100),
+                                const SizedBox(height: 55),
                                 CircleAvatar(
                                   radius: 50,
                                   backgroundImage: AssetImage(
                                     Assets.pngs.defaultAvatar.path,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 5),
                                 Text(
                                   'Welcome, ${user!.fullName}',
                                   style: AppStyles.boldText

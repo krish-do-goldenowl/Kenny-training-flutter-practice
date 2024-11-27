@@ -11,6 +11,7 @@ class _keys {
   static const String user = 'user';
   static const String token = 'token';
   static const String isAppGetStarted = 'is-app-get-started';
+  static const String uuid = 'uuid';
 }
 
 class UserPrefs {
@@ -78,6 +79,22 @@ class UserPrefs {
       xLog.e(e);
       return null;
     }
+  }
+
+  // user id
+  void setUserId(String? value) {
+    if (value == null) {
+      _prefs.remove(_keys.uuid);
+    } else {
+      _prefs.setString(_keys.uuid, value);
+    }
+  }
+
+  String getUserId() {
+    try {
+      return _prefs.getString(_keys.uuid) ?? '';
+    } catch (_) {}
+    return '';
   }
 
   // splash screen
