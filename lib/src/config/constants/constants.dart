@@ -4,4 +4,5 @@ class AppConstants {
 
 class FirestoreCollections {
   final String userCollection = 'users';
+  final String todoCollection = 'todos';
 }

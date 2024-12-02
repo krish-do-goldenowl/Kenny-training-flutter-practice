@@ -32,6 +32,17 @@ class $AssetsLottiesGen {
   List<String> get values => [locationAnimation, rocket];
 }
 
+class $AssetsPngsGen {
+  const $AssetsPngsGen();
+
+  /// File path: assets/pngs/default_avatar.png
+  AssetGenImage get defaultAvatar =>
+      const AssetGenImage('assets/pngs/default_avatar.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [defaultAvatar];
+}
+
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
 
@@ -126,6 +137,7 @@ class Assets {
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsLottiesGen lotties = $AssetsLottiesGen();
+  static const $AssetsPngsGen pngs = $AssetsPngsGen();
   static const $AssetsSvgsGen svgs = $AssetsSvgsGen();
 }
 

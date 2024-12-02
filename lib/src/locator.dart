@@ -8,6 +8,7 @@ import 'package:myapp/src/network/domain_manager.dart';
 import 'package:myapp/src/router/router.dart';
 import 'package:myapp/src/services/firebase_authentication.dart';
 import 'package:myapp/src/services/remote_config/remote_config_service.dart';
+import 'package:myapp/src/services/todos_service.dart';
 import 'package:myapp/src/services/user_prefs.dart';
 
 Future initializeApp({String? name, FirebaseOptions? firebaseOptions}) async {
@@ -32,4 +33,5 @@ void _locator() {
   GetIt.I.registerLazySingleton(() => AppRouter());
   GetIt.I.registerLazySingleton(() => AccountBloc());
   GetIt.I.registerLazySingleton(() => FirebaseAuthenticationServices());
+  GetIt.I.registerLazySingleton(() => TodoService());
 }

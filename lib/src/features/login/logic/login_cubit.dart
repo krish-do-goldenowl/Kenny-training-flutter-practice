@@ -3,6 +3,7 @@ import 'package:myapp/src/config/constants/enums.dart';
 import 'package:myapp/src/network/model/auth_response.dart';
 import 'package:myapp/src/router/coordinator.dart';
 import 'package:myapp/src/services/firebase_authentication.dart';
+import 'package:myapp/src/services/user_prefs.dart';
 
 part './login_state.dart';
 
@@ -18,6 +19,10 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(password: password));
   }
 
+  void resetState() {
+    emit(const LoginState());
+  }
+
   Future<void> handleLogin() async {
     emit(state.copyWith(status: AuthStatus.loading));
 
@@ -28,8 +33,11 @@ class LoginCubit extends Cubit<LoginState> {
       );
 
       if (response.ok != null && response.ok!) {
+        final String uuid = _firebaseAuth.currentUser!.uid;
+        UserPrefs.I.setUserId(uuid);
         emit(state.copyWith(status: AuthStatus.success));
         AppCoordinator.showDashboardScreen();
+        resetState();
       } else {
         emit(state.copyWith(
           status: AuthStatus.failure,
