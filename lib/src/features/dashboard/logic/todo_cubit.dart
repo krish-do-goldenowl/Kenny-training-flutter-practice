@@ -42,6 +42,18 @@ class TodoCubit extends Cubit<TodoState> {
     }
   }
 
+  void updateTodoItem(String docId, String content) async {
+    try {
+      final response =
+          await _todoService.updateTodoItem(docId: docId, content: content);
+      if (response) {
+        await fetchTodos();
+      }
+    } catch (e) {
+      logger.e('Error updating todo: $e');
+    }
+  }
+
   void checkTodo({required String docId, required bool isCompleted}) async {
     try {
       final response = await _todoService.checkTodoItem(

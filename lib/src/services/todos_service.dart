@@ -45,6 +45,22 @@ class TodoService {
     }
   }
 
+  Future<bool> updateTodoItem({
+    required String docId,
+    required String content,
+  }) async {
+    try {
+      await _firestore
+          .collection(AppConstants.firestoreCollections.todoCollection)
+          .doc(docId)
+          .update({'content': content});
+      return true;
+    } catch (e) {
+      log.e('Error updating todo item: $e');
+      return false;
+    }
+  }
+
   Future<bool> checkTodoItem(
       {required String docId, required bool isCompleted}) async {
     try {
