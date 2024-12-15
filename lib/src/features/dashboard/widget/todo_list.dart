@@ -127,6 +127,47 @@ class TodoListState extends State<TodoList> {
     );
   }
 
+  void _showConfirmDeleteDialog(BuildContext context, String docId) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Delete Todo',
+            style: AppStyles.semiBoldText,
+          ),
+          content: const Text(
+            'Are you sure you want to delete this task?',
+            style: AppStyles.normalText,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Cancel',
+                style: AppStyles.normalText
+                    .copyWith(color: AppColors.textHighLight),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                context.read<TodoCubit>().deleteTodo(docId);
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Delete',
+                style: AppStyles.normalText
+                    .copyWith(color: AppColors.textHighLight),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TodoCubit, TodoState>(
@@ -139,7 +180,7 @@ class TodoListState extends State<TodoList> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   blurRadius: 10,
                 ),
               ],
@@ -204,8 +245,8 @@ class TodoListState extends State<TodoList> {
                                     ),
                                   ),
                                   GestureDetector(
-                                    onTap: () =>
-                                        todoCubit.deleteTodo(todo.docId!),
+                                    onTap: () => _showConfirmDeleteDialog(
+                                        context, todo.docId!),
                                     child: const Icon(
                                       Icons.delete,
                                       color: Colors.red,

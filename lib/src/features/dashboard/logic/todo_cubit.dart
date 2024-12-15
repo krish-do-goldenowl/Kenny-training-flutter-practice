@@ -30,15 +30,15 @@ class TodoCubit extends Cubit<TodoState> {
 
   void addTodo(String content) async {
     try {
-      final response =
+      final newTodo =
           await _todoService.addTodoItem(content: content, uuid: uuid);
-      if (response) {
-        await fetchTodos();
+      if (newTodo != null) {
+        final updatedTodoList = List<TodoItem>.from(state.todoList)
+          ..insert(0, newTodo);
+        emit(state.copyWith(todoList: updatedTodoList));
       }
-      return;
     } catch (e) {
       logger.e('Error adding todo: $e');
-      return;
     }
   }
 
@@ -47,7 +47,13 @@ class TodoCubit extends Cubit<TodoState> {
       final response =
           await _todoService.updateTodoItem(docId: docId, content: content);
       if (response) {
-        await fetchTodos();
+        emit(state.copyWith(
+            todoList: state.todoList.map((todo) {
+          if (todo.docId == docId) {
+            return todo.copyWith(content: content);
+          }
+          return todo;
+        }).toList()));
       }
     } catch (e) {
       logger.e('Error updating todo: $e');
@@ -59,7 +65,13 @@ class TodoCubit extends Cubit<TodoState> {
       final response = await _todoService.checkTodoItem(
           docId: docId, isCompleted: isCompleted);
       if (response) {
-        await fetchTodos();
+        emit(state.copyWith(
+            todoList: state.todoList.map((todo) {
+          if (todo.docId == docId) {
+            return todo.copyWith(isCompleted: isCompleted);
+          }
+          return todo;
+        }).toList()));
       }
       return;
     } catch (e) {
@@ -72,7 +84,9 @@ class TodoCubit extends Cubit<TodoState> {
     try {
       final response = await _todoService.deleteTodoItem(docId);
       if (response) {
-        await fetchTodos();
+        final newTodoList =
+            state.todoList.where((todo) => todo.docId != docId).toList();
+        emit(state.copyWith(todoList: newTodoList));
       }
     } catch (e) {
       logger.e('Error deleting todo: $e');
