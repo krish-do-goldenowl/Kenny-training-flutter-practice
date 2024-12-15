@@ -93,4 +93,14 @@ class TodoCubit extends Cubit<TodoState> {
       return;
     }
   }
+
+  void reorderTodos(int oldIndex, int newIndex) {
+    if (newIndex > oldIndex) {
+      newIndex -= 1;
+    }
+    final List<TodoItem> updatedTodoList = List.from(state.todoList);
+    final TodoItem item = updatedTodoList.removeAt(oldIndex);
+    updatedTodoList.insert(newIndex, item);
+    emit(state.copyWith(todoList: updatedTodoList));
+  }
 }

@@ -8,6 +8,7 @@ class TodoItem {
   final DateTime? updatedAt;
   final String? docId;
   final bool isDeleted;
+  final int position;
 
   const TodoItem(
       {required this.content,
@@ -16,7 +17,8 @@ class TodoItem {
       this.updatedAt,
       required this.uuid,
       required this.isDeleted,
-      this.docId});
+      this.docId,
+      required this.position});
 
   // Convert data into map for Firebase
   Map<String, dynamic> toMap() {
@@ -31,6 +33,7 @@ class TodoItem {
           ? Timestamp.fromDate(updatedAt!)
           : FieldValue.serverTimestamp(),
       'uuid': uuid,
+      'position': position
     };
   }
 
@@ -43,7 +46,8 @@ class TodoItem {
         createdAt: (map['createdAt'] as Timestamp).toDate(),
         updatedAt: (map['updatedAt'] as Timestamp).toDate(),
         uuid: map['uuid'] as String,
-        docId: docId);
+        docId: docId,
+        position: map['position'] as int);
   }
 
   TodoItem copyWith({
@@ -54,15 +58,16 @@ class TodoItem {
     DateTime? updatedAt,
     String? docId,
     bool? isDeleted,
+    int? position,
   }) {
     return TodoItem(
-      content: content ?? this.content,
-      isCompleted: isCompleted ?? this.isCompleted,
-      uuid: uuid ?? this.uuid,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      docId: docId ?? this.docId,
-      isDeleted: isDeleted ?? this.isDeleted,
-    );
+        content: content ?? this.content,
+        isCompleted: isCompleted ?? this.isCompleted,
+        uuid: uuid ?? this.uuid,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        docId: docId ?? this.docId,
+        isDeleted: isDeleted ?? this.isDeleted,
+        position: position ?? this.position);
   }
 }
