@@ -77,6 +77,97 @@ class TodoListState extends State<TodoList> {
     );
   }
 
+  void _showEditTodoDialog(BuildContext context, TodoItem todo) {
+    controller.text = todo.content;
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Edit Todo',
+            style: AppStyles.semiBoldText,
+          ),
+          content: TextField(
+            controller: controller,
+            decoration: const InputDecoration(
+              hintText: 'Enter your task',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Cancel',
+                style: AppStyles.normalText
+                    .copyWith(color: AppColors.textHighLight),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                final content = controller.text.trim();
+                if (content.isNotEmpty) {
+                  context
+                      .read<TodoCubit>()
+                      .updateTodoItem(todo.docId!, content);
+                  controller.clear();
+                }
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Save',
+                style: AppStyles.normalText
+                    .copyWith(color: AppColors.textHighLight),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showConfirmDeleteDialog(BuildContext context, String docId) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text(
+            'Delete Todo',
+            style: AppStyles.semiBoldText,
+          ),
+          content: const Text(
+            'Are you sure you want to delete this task?',
+            style: AppStyles.normalText,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Cancel',
+                style: AppStyles.normalText
+                    .copyWith(color: AppColors.textHighLight),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                context.read<TodoCubit>().deleteTodo(docId);
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Delete',
+                style: AppStyles.normalText
+                    .copyWith(color: AppColors.textHighLight),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TodoCubit, TodoState>(
@@ -89,7 +180,7 @@ class TodoListState extends State<TodoList> {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   blurRadius: 10,
                 ),
               ],
@@ -127,35 +218,43 @@ class TodoListState extends State<TodoList> {
                         itemCount: state.todoList.length,
                         itemBuilder: (context, index) {
                           final TodoItem todo = state.todoList[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                CustomCheckbox(
-                                  onTap: () => todoCubit.checkTodo(
-                                      docId: todo.docId!,
-                                      isCompleted: !todo.isCompleted),
-                                  value: todo.isCompleted,
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    todo.content,
-                                    style: AppStyles.semiBoldText.copyWith(
-                                        fontSize: 12, color: AppColors.black4),
+                          return GestureDetector(
+                            onDoubleTap: () =>
+                                _showEditTodoDialog(context, todo),
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  CustomCheckbox(
+                                    onTap: () => todoCubit.checkTodo(
+                                        docId: todo.docId!,
+                                        isCompleted: !todo.isCompleted),
+                                    value: todo.isCompleted,
                                   ),
-                                ),
-                                GestureDetector(
-                                  onTap: () =>
-                                      todoCubit.deleteTodo(todo.docId!),
-                                  child: const Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(
+                                      todo.content,
+                                      style: AppStyles.semiBoldText.copyWith(
+                                          fontSize: 12,
+                                          color: AppColors.black4,
+                                          decoration: todo.isCompleted
+                                              ? TextDecoration.lineThrough
+                                              : TextDecoration.none),
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(width: 20),
-                              ],
+                                  GestureDetector(
+                                    onTap: () => _showConfirmDeleteDialog(
+                                        context, todo.docId!),
+                                    child: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
+                                ],
+                              ),
                             ),
                           );
                         },
