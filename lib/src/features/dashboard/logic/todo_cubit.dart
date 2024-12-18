@@ -80,7 +80,7 @@ class TodoCubit extends Cubit<TodoState> {
     }
   }
 
-  void deleteTodo(String docId) async {
+  void deleteTodoItem(String docId) async {
     try {
       final response = await _todoService.deleteTodoItem(docId);
       if (response) {
@@ -94,13 +94,24 @@ class TodoCubit extends Cubit<TodoState> {
     }
   }
 
-  void reorderTodos(int oldIndex, int newIndex) {
+  void reorderTodos(int oldIndex, int newIndex) async {
     if (newIndex > oldIndex) {
       newIndex -= 1;
     }
     final List<TodoItem> updatedTodoList = List.from(state.todoList);
     final TodoItem item = updatedTodoList.removeAt(oldIndex);
     updatedTodoList.insert(newIndex, item);
+
+    for (int i = 0; i < updatedTodoList.length; i++) {
+      updatedTodoList[i] = updatedTodoList[i].copyWith(position: i);
+    }
+
     emit(state.copyWith(todoList: updatedTodoList));
+
+    try {
+      await _todoService.updateTodoPositions(updatedTodoList);
+    } catch (e) {
+      logger.e('Error updating todo positions: $e');
+    }
   }
 }

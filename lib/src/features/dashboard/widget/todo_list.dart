@@ -153,7 +153,7 @@ class TodoListState extends State<TodoList> {
             ),
             TextButton(
               onPressed: () {
-                context.read<TodoCubit>().deleteTodo(docId);
+                context.read<TodoCubit>().deleteTodoItem(docId);
                 Navigator.of(context).pop();
               },
               child: Text(
