@@ -12,7 +12,8 @@ class TodoService {
       final todos = await _firestore
           .collection(AppConstants.firestoreCollections.todoCollection)
           .where('uuid', isEqualTo: uuid)
-          .orderBy('createdAt', descending: true)
+          .where('isDeleted', isEqualTo: false)
+          .orderBy('position')
           .get();
       return todos.docs
           .map((doc) => TodoItem.fromMap(doc.data(), doc.id))
@@ -23,24 +24,69 @@ class TodoService {
     }
   }
 
-  Future<bool> addTodoItem(
-      {required String content, required String uuid}) async {
+  Future<TodoItem?> addTodoItem({
+    required String content,
+    required String uuid,
+  }) async {
     if (content.isEmpty || uuid.isEmpty) {
       log.e('Empty task or UUID');
-      return false;
+      return null;
     }
+    try {
+      final position = await _getNextPosition(uuid);
+      final result = await _firestore
+          .collection(AppConstants.firestoreCollections.todoCollection)
+          .add(TodoItem(
+            content: content,
+            isCompleted: false,
+            isDeleted: false,
+            uuid: uuid,
+            position: position,
+          ).toMap());
+      final newTodo = TodoItem(
+        content: content,
+        isCompleted: false,
+        isDeleted: false,
+        uuid: uuid,
+        docId: result.id,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        position: position,
+      );
+      return newTodo;
+    } catch (e) {
+      log.e('Error adding todo item: $e');
+      return null;
+    }
+  }
+
+  Future<int> _getNextPosition(String uuid) async {
+    final todos = await _firestore
+        .collection(AppConstants.firestoreCollections.todoCollection)
+        .where('uuid', isEqualTo: uuid)
+        .where('isDeleted', isEqualTo: false)
+        .orderBy('position', descending: true)
+        .limit(1)
+        .get();
+    if (todos.docs.isEmpty) {
+      return 0;
+    } else {
+      return (todos.docs.first.data()['position'] as int) + 1;
+    }
+  }
+
+  Future<bool> updateTodoItem({
+    required String docId,
+    required String content,
+  }) async {
     try {
       await _firestore
           .collection(AppConstants.firestoreCollections.todoCollection)
-          .add(TodoItem(
-                  content: content,
-                  isCompleted: false,
-                  uuid: uuid,
-                  createdAt: DateTime.now())
-              .toMap());
+          .doc(docId)
+          .update({'content': content, 'updatedAt': DateTime.now()});
       return true;
     } catch (e) {
-      log.e('Error adding todo item: $e');
+      log.e('Error updating todo item: $e');
       return false;
     }
   }
@@ -51,7 +97,7 @@ class TodoService {
       await _firestore
           .collection(AppConstants.firestoreCollections.todoCollection)
           .doc(docId)
-          .update({'isCompleted': isCompleted});
+          .update({'isCompleted': isCompleted, 'updatedAt': DateTime.now()});
       return true;
     } catch (e) {
       log.e('Error updating todo item: $e');
@@ -64,11 +110,22 @@ class TodoService {
       await _firestore
           .collection(AppConstants.firestoreCollections.todoCollection)
           .doc(docId)
-          .delete();
+          .update({'isDeleted': true});
       return true;
     } catch (e) {
       log.e('Error deleting todo item: $e');
       return false;
     }
+  }
+
+  Future<void> updateTodoPositions(List<TodoItem> todos) async {
+    final batch = _firestore.batch();
+    for (final todo in todos) {
+      final docRef = _firestore
+          .collection(AppConstants.firestoreCollections.todoCollection)
+          .doc(todo.docId);
+      batch.update(docRef, {'position': todo.position});
+    }
+    await batch.commit();
   }
 }
